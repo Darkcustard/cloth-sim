@@ -23,10 +23,10 @@ class Cell:
         if not self.static:
 
             #gravity
-            positionBeforeUpdate = self.pos
+            positionBeforeUpdate = self.pos.copy()
 
             self.pos += self.pos - self.prevpos
-            self.pos += Vector2((0,200))*DT
+            self.pos += Vector2((0,20))*DT
 
             self.prevpos = positionBeforeUpdate
         
