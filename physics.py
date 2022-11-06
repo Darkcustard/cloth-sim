@@ -62,17 +62,17 @@ class Stick:
     def update(self,DT):
 
         distance = self.a.pos.distance_to(self.b.pos)
+        stickCenter = (self.a.pos + self.b.pos)/2
+        stickDir = (self.a.pos - self.b.pos).normalize()
         offset = distance - self.length
 
-        stickDir = (self.a.pos - self.b.pos).normalize()
-        stickCenter = (self.a.pos + self.b.pos)/2
+        if distance > self.length:
+            
+            if not self.a.static:
+                self.a.pos = stickCenter + stickDir *  self.length/2
 
-
-        if not self.a.static:
-            self.a.pos = stickCenter + stickDir *  self.length/2
-
-        if not self.b.static:
-            self.b.pos = stickCenter - stickDir * self.length/2
+            if not self.b.static:
+                self.b.pos = stickCenter - stickDir * self.length/2
 
 
         x,y = get_pos()
